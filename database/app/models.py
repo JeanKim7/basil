@@ -11,7 +11,7 @@ class User(db.Model):
     username=db.Column(db.String, nullable=False, uniqur=True)
     password = db.Column(db.String, nullable=False)
     date_created=db.Column(db.Timestamp, nullable=False, default = lambda: datetime.now(timezone.utc))
-    posts = db.relationship('Post', back_populates='author')
+    recipes = db.relationship('Recipe', back_populates='author')
     comments = db.relationship('Comment', back_populates='author')
     token = db.Column(db.String, index=True, unique=True)
     token_expiration = db.Column(db.DateTime(timezone=True))
@@ -104,7 +104,7 @@ class Comment(db.Model):
     body = db.Column(db.String, nullable=False)
     date_created=db.Column(db.DateTime, nullable=False, default= lambda: datetime.now(timezone.utc))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable =False)
-    recipe_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable = False)
+    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable = False)
     recipe = db.relationship('Recipe', back_populates='comments')
     author = db.relationship('User', back_populates='comments')
 
@@ -128,7 +128,7 @@ class Comment(db.Model):
             'id': self.id,
             'body': self.body,
             'dateCreated': self.date_created,
-            'post_id': self.post_id,
+            'recipe_id': self.recipe_id,
             'user': self.author.to_dict()
         }
     
