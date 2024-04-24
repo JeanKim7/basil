@@ -15,6 +15,7 @@ export type UserType = {
 }
 
 export type TripFormDataType = {
+    tripName:string,
     location: string,
     startDate: string,
     endDate: string,

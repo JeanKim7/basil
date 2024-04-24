@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
@@ -15,6 +16,7 @@ export default function CreateTrip({}: Props) {
     const navigate = useNavigate()
     
     const [trip, setTrip] = useState<TripFormDataType>({
+        tripName: "",
         location: "",
         startDate: "",
         endDate: ""
@@ -31,6 +33,9 @@ export default function CreateTrip({}: Props) {
             <h1 className = "text-center my-3">Create a Trip</h1>
             <Card>
                 <Form>
+                    <Form.Label htmlFor="tripName">Name of Your Trip</Form.Label> 
+                    <Form.Control name="tripName" placeholder="Enter a name for your trip" value= {trip.tripName} onChange={handleInputChange} />
+
                     <Form.Label htmlFor="city">City</Form.Label> 
                     <Form.Control name="city" placeholder="Enter the city you are visiting" value= {trip.location} onChange={handleInputChange} />
 
