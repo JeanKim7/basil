@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 
 
 
-export default function Login (/*{logUserIn}:LoginProps*/) {
+export default function Login () {
     const navigate =useNavigate()   
     const [seePassword, setSeePassword] = useState(false)
     

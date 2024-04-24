@@ -10,13 +10,14 @@ export default function Navigation(isLoggedIn, logUserOut) {
   return (
     <Navbar id='navbar'>
         <Container fluid>
-            <Navbar.Brand href='/' className= "red">SmallWorld</Navbar.Brand>
+            <Navbar.Brand href='/' className= "red">Basil</Navbar.Brand>
             <Nav>
                 {isLoggedIn ? (
                 <>
-                  <Nav.Link className= "red">My Feed</Nav.Link>
-                  <Nav.Link className= "red">Create a New Trip</Nav.Link>
-                  <Nav.Link className= "red">My Trips</Nav.Link>
+                  <Nav.Link as={Link} to='/Home' className= "red">Home</Nav.Link>
+                  <Nav.Link className= "red">My Recipes</Nav.Link>
+                  <Nav.Link as ={Link} to='/createRecipe' className= "red">Create a New Recipe</Nav.Link>
+                  <Nav.Link className= "red">Search Recipes</Nav.Link>
                   <Nav.Link as = {Link} to ='/login' className= "red">Log Out</Nav.Link>
                 </>
                 ):(
