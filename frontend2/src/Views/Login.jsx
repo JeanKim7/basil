@@ -6,41 +6,24 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button'
 
-import { UserFormDataType } from '../Types';
 
-// type LoginProps = {
-//     logUserIn:()=>void
-// }
 
 export default function Login (/*{logUserIn}:LoginProps*/) {
     const navigate =useNavigate()   
     const [seePassword, setSeePassword] = useState(false)
     
-    const [userFormData, setUserFormData] = useState<Partial<UserFormDataType>>(
+    const [userFormData, setUserFormData] = useState(
         {
             email: '',
             password: '',
         }
     )
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e) => {
         setUserFormData({...userFormData, [e.target.name]: e.target.value})
     }
 
-    // const handleFormSubmit = async(e:React.FormEvent) => {
-    //     e.preventDefault();
 
-    //     let response = await login(userFormData.email!, userFormData.password!)
-    //     if (response.error) {
-    //         console.log(response.error)
-    //     } else {
-    //         const token=response.data!.token;
-    //         localStorage.setItem('token', token);
-    //         console.log("Logged In")
-    //         logUserIn()
-    //         navigate('/')
-    //     }
-    // }
     const handleFormSubmit = () => navigate('/')
 
     return (

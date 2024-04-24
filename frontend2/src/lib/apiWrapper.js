@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { TripFormDataType } from '../Types';
 
-const baseURL:string = 'https://maps.googleapis.com/maps/api/place/textsearch/json'
-const apiKey:string = 'AIzaSyBhKZEnvUKqg2bVHd6cfF6JdeuPqlPSxuo'
+const baseURL = 'https://maps.googleapis.com/maps/api/place/textsearch/json'
+const apiKey = 'AIzaSyBhKZEnvUKqg2bVHd6cfF6JdeuPqlPSxuo'
 
-function URLify(params: string): string {
+function URLify(params) {
     if (params.includes(' ')){
-        const words:string[]= params.split(' ')
-        let returnStr:string = ''
+        const words= params.split(' ')
+        let returnStr = ''
         for (let word of words) {
             returnStr+= (word + '%20')
         }
@@ -17,7 +17,7 @@ function URLify(params: string): string {
     }
 }
 
-async function getPOIs(city:string): Promise<APIResponse<>> {
+async function getPOIs(city) {
     let data;
     let error;
     try{

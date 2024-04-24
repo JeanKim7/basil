@@ -5,9 +5,9 @@ import {Routes, Route} from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 
 import Navigation from './Components/Navigation';
-import SignUp from '../Views/SignUp';
-import Login from '../Views/Login'
-import Home from '../Views/Home'
+import SignUp from './Views/SignUp';
+import Login from './Views/Login'
+import Home from './Views/Home'
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') ? true: false)

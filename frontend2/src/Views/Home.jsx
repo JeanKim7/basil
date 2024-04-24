@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 
-import { TripFormDataType, POIFormDataType } from '../Types';
+
 
 
 
@@ -18,7 +18,7 @@ export default function Home (){
     
     const navigate = useNavigate()
     
-    const [trip, setTrip] = useState<TripFormDataType>({
+    const [trip, setTrip] = useState({
         tripName: '',
         location: "",
         startDate: "",
@@ -26,10 +26,10 @@ export default function Home (){
         }
     )
 
-    const [POIList, setPOIList] = useState<POIFormDataType[]>([])
+    const [POIList, setPOIList] = useState([])
 
 
-    const handleInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (event) => {
         setTrip({...trip, [event.target.name]:event.target.value})
     }
 
@@ -37,13 +37,13 @@ export default function Home (){
         setPOIList([...POIList,{name: "", description: ""}])
     }
     
-    const handleInputChangePOI = (e: React.ChangeEvent<HTMLInputElement>, i: number) =>{
+    const handleInputChangePOI = () =>{
         const value = e.target.value
         const onChangePOIList = [...POIList]
         onChangePOIList[i].name = value
     }
     
-    const handleDelete=(i:number) => {
+    const handleDelete=(i) => {
         const deletePOI = [...POIList]
         deletePOI.splice(i,1)
         setPOIList(deletePOI)
@@ -79,10 +79,10 @@ export default function Home (){
                             <Container>
                                 <h3>Add an Itinerary Item</h3>
                                 <Form.Label htmlFor="name">Name</Form.Label>
-                                <Form.Control name="name" placeholder="Enter the name of the place of interest" value = {val.name} onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleInputChangePOI(e,i)} />
+                                <Form.Control name="name" placeholder="Enter the name of the place of interest" value = {val.name} onChange={(e)=>handleInputChangePOI(e,i)} />
                                 
                                 <Form.Label htmlFor="description">Description</Form.Label>
-                                <Form.Control name="description" placeholder="Enter a description of the place of interest" value = {val.name} onChange={(e:React.ChangeEvent<HTMLInputElement>)=>handleInputChangePOI(e,i)} />
+                                <Form.Control name="description" placeholder="Enter a description of the place of interest" value = {val.name} onChange={(e)=>handleInputChangePOI(e,i)} />
                                 <Button onClick={()=>handleDelete(i)}>Delete this itinerary item</Button>
                                 
 

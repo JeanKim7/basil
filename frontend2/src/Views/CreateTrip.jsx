@@ -6,16 +6,16 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import { TripFormDataType } from '../Types';
 
-type Props = {}
 
-export default function CreateTrip({}: Props) {
+
+export default function CreateTrip() {
 
     
       
     
     const navigate = useNavigate()
     
-    const [trip, setTrip] = useState<TripFormDataType>({
+    const [trip, setTrip] = useState({
         tripName: "",
         location: "",
         startDate: "",
@@ -24,7 +24,7 @@ export default function CreateTrip({}: Props) {
     )
     const [POI, setPOI] = useState()
 
-    const handleInputChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (event) => {
         setTrip({...trip, [event.target.name]:event.target.value})
     }
 

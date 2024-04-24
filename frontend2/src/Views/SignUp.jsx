@@ -6,18 +6,16 @@ import Form from 'react-bootstrap/Form';
 import  InputGroup from "react-bootstrap/InputGroup";
 import Button  from "react-bootstrap/Button";
 
-import { UserFormDataType } from "../src/Types";
 
 
 
-type Props = {}
 
-export default function SignUp({}: Props) {
+export default function SignUp() {
 
     const navigate=useNavigate()
 
     const [seePassword, setSeePassword] = useState(false)
-    const [userFormData, setUserFormData] = useState<UserFormDataType>(
+    const [userFormData, setUserFormData] = useState(
         {
             first_name: '',
             last_name: '',
@@ -27,7 +25,7 @@ export default function SignUp({}: Props) {
         }
     )
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleInputChange = (e) => {
         setUserFormData({...userFormData, [e.target.name]: e.target.value})
     }
 
