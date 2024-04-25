@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { UserType, UserFormDataType, TokenType } from '../types';
 
 const baseURL = 'https://basil-database.onrender.com'
 const userEndpoint = '/users'
@@ -11,23 +11,26 @@ const apiClientNoAuth = () => axios.create({
     baseURL: baseURL
 })
 
-const apiClientBasicAuth = (username, password) => axios.create({
+const apiClientBasicAuth = (username:string, password:string) => axios.create({
     baseURL: baseURL,
     headers: {
         Authorization: 'Basic ' + btoa(username + ':' + password)
     }
 })
 
-const apiClientTokenAuth = (token) => axios.create({
+const apiClientTokenAuth = (token:string) => axios.create({
     baseURL: baseURL,
     headers: {
         Authorization: 'Bearer ' + token
     }
 })
 
+type APIResponse<T> = {
+    data?: T,
+    error?: string
+}
 
-
-async function register(newUserData) {
+async function register(newUserData:UserFormDataType): Promise<APIResponse<UserType>>{
     let data;
     let error;
     try{
@@ -43,7 +46,7 @@ async function register(newUserData) {
     return { data, error }
 }
 
-async function login(username, password) {
+async function login(username:string, password:string): Promise<APIResponse<TokenType>>{
     let data;
     let error;
     try{
@@ -59,7 +62,7 @@ async function login(username, password) {
     return {data, error}
 }
 
-async function getMe(token){
+async function getMe(token:string): Promise<APIResponse<UserType>>{
     let data;
     let error;
     try {
@@ -92,23 +95,23 @@ async function getAllRecipes(){
 
 }
 
-async function createRecipe(token, recipeData) {
-    let data;
-    let error;
-    try{
-        const response = await apiClientTokenAuth(token).post(recipeEndpoint, recipeData)
-        data = response.data
-    } catch(err) {
-        if (axios.isAxiosError(err)){
-            error = err.response?.data.error
-        } else {
-            error = 'Something went wrong'
-        }
-    }
-    return { data, error }
-}
+// async function createRecipe(token:string, recipeData) {
+//     let data;
+//     let error;
+//     try{
+//         const response = await apiClientTokenAuth(token).post(recipeEndpoint, recipeData)
+//         data = response.data
+//     } catch(err) {
+//         if (axios.isAxiosError(err)){
+//             error = err.response?.data.error
+//         } else {
+//             error = 'Something went wrong'
+//         }
+//     }
+//     return { data, error }
+// }
 
-async function getRecipeById(recipeId) {
+async function getRecipeById(recipeId:string|number) {
     let data;
     let error;
     try{
@@ -124,23 +127,23 @@ async function getRecipeById(recipeId) {
     return { data, error }
 }
 
-async function editRecipeById(recipeId, token, editedRecipeData) {
-    let data;
-    let error;
-    try{
-        const response = await apiClientTokenAuth(token).put(recipeEndpoint + '/' + recipeId, editedRecipeData)
-        data = response.data
-    } catch(err) {
-        if (axios.isAxiosError(err)){
-            error = err.response?.data?.error || `Recipe with ID ${recipeId} does not exist`
-        } else {
-            error = 'Something went wrong'
-        }
-    }
-    return { data, error }
-}
+// async function editRecipeById(recipeId:string|number, token:string, editedRecipeData) {
+//     let data;
+//     let error;
+//     try{
+//         const response = await apiClientTokenAuth(token).put(recipeEndpoint + '/' + recipeId, editedRecipeData)
+//         data = response.data
+//     } catch(err) {
+//         if (axios.isAxiosError(err)){
+//             error = err.response?.data?.error || `Recipe with ID ${recipeId} does not exist`
+//         } else {
+//             error = 'Something went wrong'
+//         }
+//     }
+//     return { data, error }
+// }
 
-async function deleteRecipeById(recipeId, token) {
+async function deleteRecipeById(recipeId:string|number, token:string) {
     let data;
     let error;
     try{
@@ -162,7 +165,7 @@ export {
     getMe,
     getAllRecipes,
     getRecipeById,
-    createRecipe,
+    // createRecipe,
     deleteRecipeById,
-    editRecipeById
+    // editRecipeById
 }

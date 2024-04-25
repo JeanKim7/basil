@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import {useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,11 +7,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 
-
+import { IngredientsType, RecipeFormDataType } from '../types';
 
 export default function CreateRecipe() {
 
-    const [recipe, setRecipe] = useState({
+    const [recipe, setRecipe] = useState<RecipeFormDataType>({
         name: '',
         description: '',
         cuisine: "",
@@ -20,24 +20,25 @@ export default function CreateRecipe() {
         instructions: ''
         }
     )
-    const [ingredientList, setIngredientList] = useState([])
+    const [ingredientList, setIngredientList] = useState<IngredientsType[]>([])
 
 
-    const handleInputChange = (event) => {
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setRecipe({...recipe, [event.target.name]:event.target.value})
     }
 
-    const handleAddClick =() => {
+    const handleAddClick = () => {
         setIngredientList([...ingredientList,{ingredient: "", quantity: ""}])
     }
-    
-    const handleInputChangeIngredient = () =>{
-        const value = e.target.value
+
+
+    const handleInputChangeIngredient = (event: React.ChangeEvent<FormControlElement>, i:number) => {
+        const value = event.target.value
         const onChangeIngredientList = [...ingredientList]
-        onChangeIngredientList[i].name = value
+        onChangeIngredientList[i].ingredient = value
     }
     
-    const handleDelete=(i) => {
+    const handleDelete= (i:number) => {
         const deleteIngredient = [...ingredientList]
         deleteIngredient.splice(i,1)
         setIngredientList(deleteIngredient)
@@ -75,10 +76,10 @@ export default function CreateRecipe() {
                             <Container key={i}>
                                 <h3>Add an Ingredient</h3>
                                 <Form.Label htmlFor="ingredient">Ingredient</Form.Label>
-                                <Form.Control name="ingredient" placeholder="Enter the ingredient" value = {val.name} onChange={(e)=>handleInputChangeIngredient(e,i)} />
+                                <Form.Control name="ingredient" placeholder="Enter the ingredient" value = {val.ingredient} onChange={(e)=>handleInputChangeIngredient(e,i)} />
                                 
                                 <Form.Label htmlFor="quantity">Description</Form.Label>
-                                <Form.Control name="quantity" placeholder="Enter the quantity of ingredient needed" value = {val.name} onChange={(e)=>handleInputChangeIngredient(e,i)} />
+                                <Form.Control name="quantity" placeholder="Enter the quantity of ingredient needed" value = {val.ingredient} onChange={(e)=>handleInputChangeIngredient(e,i)} />
                                 <Button onClick={()=>handleDelete(i)}>Delete this ingredient</Button>
                                 
                             </Container>
@@ -94,6 +95,3 @@ export default function CreateRecipe() {
     )
 }
       
-    
-
-
