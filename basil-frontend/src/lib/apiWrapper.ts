@@ -1,10 +1,13 @@
 import axios from 'axios';
-import { UserType, UserFormDataType, TokenType } from '../types';
+import { UserType, UserFormDataType, TokenType, RecipeType, RecipeFormDataType } from '../types';
 
-const baseURL = 'https://basil-database.onrender.com'
+const baseURL = 'https://basil-database-1.onrender.com'
 const userEndpoint = '/users'
 const recipeEndpoint = '/recipes'
 const tokenEndpoint = '/token'
+
+const apiURL = 'www.themealdb.com/api/json/v1/1/search.php?key=1&s='
+
 
 
 const apiClientNoAuth = () => axios.create({
@@ -78,7 +81,7 @@ async function getMe(token:string): Promise<APIResponse<UserType>>{
     return { data, error }
 }
 
-async function getAllRecipes(){
+async function getAllRecipes(): Promise<APIResponse<RecipeType[]>>{
     let data;
     let error;
     try{
@@ -95,23 +98,24 @@ async function getAllRecipes(){
 
 }
 
-// async function createRecipe(token:string, recipeData) {
-//     let data;
-//     let error;
-//     try{
-//         const response = await apiClientTokenAuth(token).post(recipeEndpoint, recipeData)
-//         data = response.data
-//     } catch(err) {
-//         if (axios.isAxiosError(err)){
-//             error = err.response?.data.error
-//         } else {
-//             error = 'Something went wrong'
-//         }
-//     }
-//     return { data, error }
-// }
+async function createRecipe(token:string, recipeData: RecipeFormDataType) {
+    let data;
+    let error;
+    console.log(recipeData)
+    try{
+        const response = await apiClientTokenAuth(token).post(recipeEndpoint, recipeData)
+        data = response.data
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data.error
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return { data, error }
+}
 
-async function getRecipeById(recipeId:string|number) {
+async function getRecipeById(recipeId:string|number): Promise<APIResponse<RecipeType>> {
     let data;
     let error;
     try{
@@ -127,23 +131,23 @@ async function getRecipeById(recipeId:string|number) {
     return { data, error }
 }
 
-// async function editRecipeById(recipeId:string|number, token:string, editedRecipeData) {
-//     let data;
-//     let error;
-//     try{
-//         const response = await apiClientTokenAuth(token).put(recipeEndpoint + '/' + recipeId, editedRecipeData)
-//         data = response.data
-//     } catch(err) {
-//         if (axios.isAxiosError(err)){
-//             error = err.response?.data?.error || `Recipe with ID ${recipeId} does not exist`
-//         } else {
-//             error = 'Something went wrong'
-//         }
-//     }
-//     return { data, error }
-// }
+async function editRecipeById(token:string,recipeId:string|number,  editedRecipeData: RecipeFormDataType) {
+    let data;
+    let error;
+    try{
+        const response = await apiClientTokenAuth(token).put(recipeEndpoint + '/' + recipeId, editedRecipeData)
+        data = response.data
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data?.error || `Recipe with ID ${recipeId} does not exist`
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return { data, error }
+}
 
-async function deleteRecipeById(recipeId:string|number, token:string) {
+async function deleteRecipeById(token:string, recipeId:string|number) {
     let data;
     let error;
     try{
@@ -165,7 +169,7 @@ export {
     getMe,
     getAllRecipes,
     getRecipeById,
-    // createRecipe,
+    createRecipe,
     deleteRecipeById,
-    // editRecipeById
+    editRecipeById
 }

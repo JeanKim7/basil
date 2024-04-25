@@ -9,6 +9,8 @@ import SignUp from './views/SignUp';
 import Login from './views/Login'
 import Home from './views/Home'
 import CreateRecipe from './views/CreateRecipe';
+import LandingPage from './views/LandingPage';
+import AboutUs from './views/AboutUs';
 
 import { getMe } from './lib/apiWrapper'
 import { UserType } from './types';
@@ -56,7 +58,8 @@ export default function App() {
     <Navigation isLoggedIn={isLoggedIn} logUserOut={logUserOut}/>
       <Container>
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={isLoggedIn? <Home />:<LandingPage/> } />
+          <Route path='/aboutUs' element={<AboutUs />} />
           <Route path ='/signup' element={<SignUp />} />
           <Route path = 'login' element = {<Login logUserIn = {logUserIn}/>} />
           <Route path = '/createRecipe' element = {<CreateRecipe/>} />

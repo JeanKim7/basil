@@ -17,7 +17,7 @@ export default function Navigation({isLoggedIn, logUserOut}: NavigationProps) {
             <Nav>
                 {isLoggedIn ? (
                   <>
-                  <Nav.Link as={Link} to='/Home' className= "red">Home</Nav.Link>
+                  <Nav.Link as={Link} to='/' className= "red">Home</Nav.Link>
                   <Nav.Link className= "red">My Recipes</Nav.Link>
                   <Nav.Link as ={Link} to='/createRecipe' className= "red">Create a New Recipe</Nav.Link>
                   <Nav.Link className= "red">Search Recipes</Nav.Link>
@@ -25,7 +25,7 @@ export default function Navigation({isLoggedIn, logUserOut}: NavigationProps) {
                 </>
                 ):(
                   <>
-                  <Nav.Link className= "red">About Us</Nav.Link>
+                  <Nav.Link as={Link} to='/aboutUs'className= "red">About Us</Nav.Link>
                   <Nav.Link as={Link} to ='/signup' className= "red">Sign Up</Nav.Link>
                   <Nav.Link as = {Link} to ='/login' className= "red">Log In</Nav.Link>
                 </>

@@ -54,11 +54,11 @@ export default function SignUp() {
         <Card>
             <Card.Body>
                 <Form onSubmit={handleFormSubmit}>
-                    <Form.Label htmlFor="first_name">First Name</Form.Label>
-                    <Form.Control id='first_name' name= 'first_name' placeholder='Enter first name' value = {userFormData.firstName} onChange = {handleInputChange}/>
+                    <Form.Label htmlFor="firstName">First Name</Form.Label>
+                    <Form.Control id='firstName' name= 'firstName' placeholder='Enter first name' value = {userFormData.firstName} onChange = {handleInputChange}/>
 
-                    <Form.Label htmlFor="last_name">Last Name</Form.Label>
-                    <Form.Control id='last_name' name= 'last_name' placeholder='Enter last name' value = {userFormData.lastName} onChange = {handleInputChange}/>
+                    <Form.Label htmlFor="lastName">Last Name</Form.Label>
+                    <Form.Control id='lastName' name= 'lastName' placeholder='Enter last name' value = {userFormData.lastName} onChange = {handleInputChange}/>
 
                     <Form.Label htmlFor="email">Email</Form.Label>
                     <Form.Control id='email' name= 'email' placeholder='Enter email' value = {userFormData.email} onChange = {handleInputChange}/>
