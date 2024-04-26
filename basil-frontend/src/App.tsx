@@ -5,15 +5,17 @@ import {Routes, Route} from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 
 import Navigation from './components/Navigation';
-import SignUp from './views/SignUp';
-import Login from './views/Login'
-import Home from './views/Home'
-import CreateRecipe from './views/CreateRecipe';
 import LandingPage from './views/LandingPage';
 import AboutUs from './views/AboutUs';
+import SignUp from './views/SignUp';
+import Login from './views/Login';
+import Home from './views/Home'
+import MyRecipes from './views/MyRecipes';
+import CreateRecipe from './views/CreateRecipe';
+import SearchRecipe from './views/SearchRecipe';
 
-import { getMe } from './lib/apiWrapper'
-import { UserType } from './types';
+import { getMe, getAllRecipes } from './lib/apiWrapper'
+import { RecipeType, UserType } from './types';
 
 export default function App() {
 
@@ -39,6 +41,7 @@ export default function App() {
     getLoggedInUser()
 }, [isLoggedIn])
   
+
   const logUserIn = () => {
   setIsLoggedIn(true)
 }
@@ -48,8 +51,8 @@ export default function App() {
     setLoggedInUser(null);
     localStorage.removeItem('token')
     localStorage.removeItem('tokenExp')
-    localStorage.removeItem('currentUser');
-    console.log('You have been logged out', 'dark')
+    localStorage.removeItem('currentUserId');
+    console.log('You have been logged out')
 }
   
 
@@ -58,11 +61,14 @@ export default function App() {
     <Navigation isLoggedIn={isLoggedIn} logUserOut={logUserOut}/>
       <Container>
         <Routes>
-          <Route path='/' element={isLoggedIn? <Home />:<LandingPage/> } />
+          <Route path='/' element={<LandingPage/> } />
+          <Route path='/Home' element = {<Home currentUser={loggedInUser}/>} />
           <Route path='/aboutUs' element={<AboutUs />} />
           <Route path ='/signup' element={<SignUp />} />
           <Route path = 'login' element = {<Login logUserIn = {logUserIn}/>} />
+          <Route path = '/myRecipes' element = {<MyRecipes />} />
           <Route path = '/createRecipe' element = {<CreateRecipe/>} />
+          <Route path='/search' element= {<SearchRecipe/>} />
         </Routes>
       </Container>
    </>)

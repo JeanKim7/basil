@@ -41,12 +41,17 @@ export type RecipeFormDataType = {
     instructions:string
 }
 
+
 export type TokenType = {
     token:string,
     tokenExpiration:string
 }
 
-export type apiResonseType = {
+export type apiResponseType  = {
+    meals: apiRecipeType[] | []
+}
+
+export type apiRecipeType = {
         idMeal: string,
         strMeal: string | null,
         strDrinkAlternate: null,

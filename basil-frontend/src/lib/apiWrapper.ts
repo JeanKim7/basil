@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { UserType, UserFormDataType, TokenType, RecipeType, RecipeFormDataType } from '../types';
+import { UserType, UserFormDataType, TokenType, RecipeType, RecipeFormDataType, apiResponseType } from '../types';
 
-const baseURL = 'https://basil-database-1.onrender.com'
+const baseURL = 'https://project-basil-database.onrender.com'
 const userEndpoint = '/users'
 const recipeEndpoint = '/recipes'
 const tokenEndpoint = '/token'
 
-const apiURL = 'www.themealdb.com/api/json/v1/1/search.php?key=1&s='
+const apiURL = 'https://www.themealdb.com/api/json/v1/1'
 
 
 
@@ -26,6 +26,10 @@ const apiClientTokenAuth = (token:string) => axios.create({
     headers: {
         Authorization: 'Bearer ' + token
     }
+})
+
+const apiFoodNoAuth = () => axios.create({
+    baseURL: apiURL
 })
 
 type APIResponse<T> = {
@@ -131,7 +135,7 @@ async function getRecipeById(recipeId:string|number): Promise<APIResponse<Recipe
     return { data, error }
 }
 
-async function editRecipeById(token:string,recipeId:string|number,  editedRecipeData: RecipeFormDataType) {
+async function editRecipeById(token:string,recipeId:string|number,  editedRecipeData: Partial<RecipeFormDataType>) {
     let data;
     let error;
     try{
@@ -163,6 +167,22 @@ async function deleteRecipeById(token:string, recipeId:string|number) {
     return { data, error }
 }
 
+async function apiSearch (search: string): Promise<APIResponse<apiResponseType>>{
+    let data;
+    let error;
+    try{
+        const response = await apiFoodNoAuth().get(`/search.php?key=1&s=${search}`)
+        data = response.data
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data?.error || `Recipes for ${search} were not found`
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return { data, error }
+}
+
 export {
     login,
     register,
@@ -171,5 +191,6 @@ export {
     getRecipeById,
     createRecipe,
     deleteRecipeById,
-    editRecipeById
+    editRecipeById,
+    apiSearch
 }

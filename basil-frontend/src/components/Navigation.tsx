@@ -11,23 +11,23 @@ type NavigationProps ={
 
 export default function Navigation({isLoggedIn, logUserOut}: NavigationProps) {
   return (
-    <Navbar id='navbar'>
+    <Navbar id='navbar' className='white1'>
         <Container fluid>
-            <Navbar.Brand href='/' className= "red">Basil</Navbar.Brand>
+            <Navbar.Brand id = "brand" href= {isLoggedIn ?'/Home': '/'} className='white1'>Basil</Navbar.Brand>
             <Nav>
                 {isLoggedIn ? (
                   <>
-                  <Nav.Link as={Link} to='/' className= "red">Home</Nav.Link>
-                  <Nav.Link className= "red">My Recipes</Nav.Link>
-                  <Nav.Link as ={Link} to='/createRecipe' className= "red">Create a New Recipe</Nav.Link>
-                  <Nav.Link className= "red">Search Recipes</Nav.Link>
-                  <Nav.Link as = {Link} onClick={()=>logUserOut()} to ='/login' className= "red">Log Out</Nav.Link>
+                  <Nav.Link as={Link} to='/Home' className='white1'>Home</Nav.Link>
+                  <Nav.Link as={Link} to = '/myRecipes' className='white1'>My Recipes</Nav.Link>
+                  <Nav.Link as ={Link} to='/createRecipe' className='white1'>Create a New Recipe</Nav.Link>
+                  <Nav.Link as= {Link} to ='/search' className='white1'>Search Recipes</Nav.Link>
+                  <Nav.Link as = {Link} onClick={()=>logUserOut()} to ='/' className='white1'>Log Out</Nav.Link>
                 </>
                 ):(
                   <>
-                  <Nav.Link as={Link} to='/aboutUs'className= "red">About Us</Nav.Link>
-                  <Nav.Link as={Link} to ='/signup' className= "red">Sign Up</Nav.Link>
-                  <Nav.Link as = {Link} to ='/login' className= "red">Log In</Nav.Link>
+                  <Nav.Link as={Link} to='/aboutUs' className='white1'>About Us</Nav.Link>
+                  <Nav.Link as={Link} to ='/signup' className='white1'>Sign Up</Nav.Link>
+                  <Nav.Link as = {Link} to ='/login' className='white1'>Log In</Nav.Link>
                 </>
                 )}
             </Nav>

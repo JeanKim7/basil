@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container'
 
 import { RecipeFormDataType } from '../types';
 import { createRecipe } from '../lib/apiWrapper';
@@ -45,9 +46,10 @@ export default function CreateRecipe() {
     return (
         <>
 
-            <h1 className = "text-center my-3">Create a Recipe</h1>
+            
         
-            <Card>
+            <Card className= 'my-5 p-3'>
+            <h1 className = "text-center my-3">Create a Recipe</h1>
                 <Form onSubmit={handleFormSubmit}>
                     <Form.Label htmlFor="name">Name of Your Recipe</Form.Label> 
                     <Form.Control name="name" placeholder="Enter a name for your recipe" value= {recipe.name} onChange={handleInputChange} />
@@ -69,8 +71,9 @@ export default function CreateRecipe() {
 
                     <Form.Label htmlFor="instructions">Instructions</Form.Label>
                     <Form.Control as= "textarea" name="instructions" placeholder="Enter the Instructions for your recipe" value= {recipe.instructions} onChange={handleInputChange} />
-                    
-                    <Button type='submit'>Create Recipe</Button>
+                    <Container className ="d-flex justify-content-center">
+                        <Button type='submit' className='button-size'>Create Recipe</Button>
+                    </Container>
                 </Form>
             </Card>
         </>

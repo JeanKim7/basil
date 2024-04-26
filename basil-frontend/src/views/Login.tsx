@@ -10,7 +10,7 @@ import { login } from '../lib/apiWrapper';
 import { UserFormDataType } from '../types'
 
 type LoginProps = {
-    logUserIn: () => void,
+    logUserIn: () => void
 }
 
 export default function Login ({logUserIn}: LoginProps) {
@@ -30,6 +30,7 @@ export default function Login ({logUserIn}: LoginProps) {
 
     const handleFormSubmit = async (e:React.FormEvent) => {
         e.preventDefault();
+        console.log('Logging in...')
 
         const response = await login(userFormData.username!, userFormData.password!)
         if (response.error){
@@ -37,11 +38,12 @@ export default function Login ({logUserIn}: LoginProps) {
         } else {
             const token = response.data!.token;
             const tokenExp = response.data!.tokenExpiration;
+            console.log(response.data)
             localStorage.setItem('token', token);
             localStorage.setItem('tokenExp', tokenExp);
             logUserIn();
             console.log("You have successfully logged in");
-            navigate('/')
+            navigate('/Home')
         }
     }
 
@@ -49,8 +51,8 @@ export default function Login ({logUserIn}: LoginProps) {
 
     return (
         <>
+        <Card className = "start-form login">
         <h1 className='text-center'>Login</h1>
-        <Card>
         <Card.Body>
             <Form onSubmit={handleFormSubmit}>
                 <Form.Label htmlFor="username">Username</Form.Label>

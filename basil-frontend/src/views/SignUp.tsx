@@ -50,8 +50,8 @@ export default function SignUp() {
 
     return (
         <>
+        <Card className = "start-form">
         <h1 className="text-center">Register Here</h1>
-        <Card>
             <Card.Body>
                 <Form onSubmit={handleFormSubmit}>
                     <Form.Label htmlFor="firstName">First Name</Form.Label>
@@ -72,12 +72,12 @@ export default function SignUp() {
                         <InputGroup.Text onClick = {() => setSeePassword(!seePassword)}>{seePassword?"Hide" :"Show"}</InputGroup.Text>
                     </InputGroup>
                     
-                    <Form.Label htmlFor="confirmPassword">Cofnirm Password</Form.Label>
+                    <Form.Label htmlFor="confirmPassword">Confirm Password</Form.Label>
                     <InputGroup>
                         <Form.Control id='confirmPassword' name= 'confirmPassword' placeholder='Confirm pasword' type={!seePassword? 'password': 'text'} value = {userFormData.confirmPassword} onChange = {handleInputChange}/>
                         <InputGroup.Text onClick = {() => setSeePassword(!seePassword)}>{seePassword?"Hide" :"Show"}</InputGroup.Text>
                     </InputGroup>
-                    <Button type ="submit" variant='success' disabled={disableSubmit}>Create User</Button>
+                    <Button id = 'sign-up-btn' type ="submit" variant='success' disabled={disableSubmit}>Sign Up</Button>
                 </Form>
             </Card.Body>
         </Card>
